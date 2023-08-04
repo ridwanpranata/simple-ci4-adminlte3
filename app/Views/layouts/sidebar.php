@@ -22,6 +22,12 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= url_to('books') ?>" class="nav-link">
+                        <i class="fas fa-book nav-icon"></i>
+                        <p>Books</p>
+                    </a>
+                </li>
                 
             </ul>
         </nav>
