@@ -33,7 +33,9 @@ $routes->get('/', 'Home::index');
 // => default controller
 $routes->get('/dashboard', 'DashboardController::index',['as' => 'dashboard']);
 
-$routes->get('/books', 'BookController::index',['as' => 'books']);
+$routes->get('/book', 'BookController::index',['as' => 'book']);
+$routes->get('/book/create', 'BookController::create',['as' => 'book-create']);
+$routes->get('/book/store', 'BookController::store',['as' => 'book-store']);
 
 
 

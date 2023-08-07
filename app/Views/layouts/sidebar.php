@@ -23,7 +23,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= url_to('books') ?>" class="nav-link">
+                    <a href="<?= url_to('book') ?>" class="nav-link">
                         <i class="fas fa-book nav-icon"></i>
                         <p>Books</p>
                     </a>

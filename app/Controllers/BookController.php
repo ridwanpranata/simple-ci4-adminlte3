@@ -18,10 +18,28 @@ class BookController extends BaseController
     public function index()
     {
         $data = [
-            'title' => 'Book List',
+            'title' => 'Book Management',
             'page_title' => 'Book List',
             'books' => $this->BookModel->findAll()
         ];
         return view('books/index', $data);
+    }
+
+    public function create()
+    {
+        $data = [
+            'title' => 'Book Management',
+            'page_title' => 'Create Book',
+        ];
+
+        return view('books/create', $data);
+    }
+
+    public function store()
+    {
+        dd($this->request->getPost());
+        
+        dd("store");
+        
     }
 }
