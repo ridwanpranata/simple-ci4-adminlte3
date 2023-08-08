@@ -35,7 +35,10 @@ $routes->get('/dashboard', 'DashboardController::index',['as' => 'dashboard']);
 
 $routes->get('/book', 'BookController::index',['as' => 'book']);
 $routes->get('/book/create', 'BookController::create',['as' => 'book-create']);
-$routes->get('/book/store', 'BookController::store',['as' => 'book-store']);
+$routes->post('/book/store', 'BookController::store',['as' => 'book-store']);
+$routes->get('/book/edit/(:num)', 'BookController::edit/$1',['as' => 'book-edit']);
+$routes->post('/book/update', 'BookController::update',['as' => 'book-update']);
+$routes->get('/book/delete/(:num)', 'BookController::delete/$1',['as' => 'book-delete']);
 
 
 

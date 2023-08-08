@@ -24,7 +24,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Manage Book</h3>
                             <div class="d-flex justify-content-end mb-1">
-                                <a href="javascript:void(0);" class="btn btn-success mb-2" id="btn_modal_create">Create</a>
+                                <a href="<?= url_to('book-create') ?>" class="btn btn-success mb-2" id="btn_modal_create">Create</a>
                             </div>
                         </div>
                         <!-- /.card-header -->
@@ -45,8 +45,8 @@
                                         <td><?= $book['name'] ?></td>
                                         <td><?= $book['description'] ?></td>
                                         <td>
-                                            <a href="javascript:void(0);" class="btn btn-primary btn-sm">Edit</a>
-                                            <a href="javascript:void(0);" class="btn btn-danger btn-sm">Delete</a>
+                                            <a href="<?= url_to('book-edit', $book['id'])?>" class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="<?= url_to('book-delete', $book['id'])?>" class="btn btn-danger btn-sm">Delete</a>
                                         </td>
                                     </tr>
                                     <?php endforeach ?>
