@@ -42,6 +42,26 @@ $routes->get('/book/delete/(:num)', 'BookController::delete/$1',['as' => 'book-d
 
 
 
+service('auth')->routes($routes);
+
+// API Routes
+$routes->group("api", ["namespace" => "App\Controllers"], function ($routes) {
+
+    $routes->get("invalid-access", "AuthController::accessDenied");
+
+    // Post
+    $routes->post("register", "AuthController::register");
+
+    // Post
+    $routes->post("login", "AuthController::login");
+
+    // Get
+    $routes->get("profile", "AuthController::profile", ["filter" => "apiauth"]);
+
+    // Get
+    $routes->get("logout", "AuthController::logout", ["filter" => "apiauth"]);
+});
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
