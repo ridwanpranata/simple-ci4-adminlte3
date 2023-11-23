@@ -27,7 +27,7 @@
             <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Hai</div>
+                    <div class="card-header">Hai <?= $user_login->username ?></div>
                     <div class="card-body">
                         <p>Welcome to Codeigniter 4 with AdminLTE 3 Template</p>
                     </div>

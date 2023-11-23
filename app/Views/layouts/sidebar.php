@@ -28,6 +28,12 @@
                         <p>Books</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?= url_to('logout') ?>" class="nav-link">
+                        <i class="fas fa-sign-out-alt nav-icon"></i>
+                        <p>Logout</p>
+                    </a>
+                </li>
                 
             </ul>
         </nav>
