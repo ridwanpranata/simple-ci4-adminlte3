@@ -23,6 +23,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="<?= url_to('group') ?>" class="nav-link">
+                        <i class="fas fa-users nav-icon"></i>
+                        <p>Groups</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="<?= url_to('book') ?>" class="nav-link">
                         <i class="fas fa-book nav-icon"></i>
                         <p>Books</p>

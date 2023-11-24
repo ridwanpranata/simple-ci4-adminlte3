@@ -22,7 +22,7 @@ class BookController extends BaseController
             'page_title' => 'Book List',
             'books' => $this->BookModel->findAll()
         ];
-        return view('books/index', $data);
+        return view('book/index', $data);
     }
 
     public function create()
@@ -32,7 +32,7 @@ class BookController extends BaseController
             'page_title' => 'Create Book',
         ];
 
-        return view('books/create', $data);
+        return view('book/create', $data);
     }
 
     public function store()
@@ -56,7 +56,7 @@ class BookController extends BaseController
             'page_title' => 'Edit Book',
             'book' => $this->BookModel->find($book_id)
         ];
-        return view('books/edit', $data);
+        return view('book/edit', $data);
     }
 
     public function update()
