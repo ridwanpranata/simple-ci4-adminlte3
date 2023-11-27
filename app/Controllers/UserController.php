@@ -4,7 +4,6 @@ namespace App\Controllers;
 use CodeIgniter\Shield\Validation\ValidationRules;
 use CodeIgniter\Shield\Entities\User;
 
-
 use App\Controllers\BaseController;
 use App\Models\UserModel;
 

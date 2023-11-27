@@ -26,6 +26,8 @@ use CodeIgniter\Shield\Authentication\Passwords\NothingPersonalValidator;
 use CodeIgniter\Shield\Authentication\Passwords\PwnedValidator;
 use CodeIgniter\Shield\Authentication\Passwords\ValidatorInterface;
 // use CodeIgniter\Shield\Models\UserModel;
+
+// ## Customizig User Provider
 use App\Models\UserModel;
 
 
