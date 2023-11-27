@@ -40,6 +40,15 @@ $routes->get('/book/edit/(:num)', 'BookController::edit/$1',['as' => 'book-edit'
 $routes->post('/book/update', 'BookController::update',['as' => 'book-update']);
 $routes->get('/book/delete/(:num)', 'BookController::delete/$1',['as' => 'book-delete']);
 
+$routes->group('user', static function ($routes) {
+    $routes->get('', 'UserController::index',['as' => 'user']);
+    $routes->get('create', 'UserController::create',['as' => 'user-create']);
+    $routes->post('store', 'UserController::store',['as' => 'user-store']);
+    $routes->get('edit/(:num)', 'UserController::edit/$1',['as' => 'user-edit']);
+    $routes->post('update', 'UserController::update',['as' => 'user-update']);
+    $routes->get('delete/(:num)', 'UserController::delete/$1',['as' => 'user-delete']);
+});
+
 $routes->group('group', static function ($routes) {
     $routes->get('', 'GroupController::index',['as' => 'group']);
     $routes->get('create', 'GroupController::create',['as' => 'group-create']);
