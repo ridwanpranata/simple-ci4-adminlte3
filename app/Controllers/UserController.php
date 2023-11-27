@@ -6,20 +6,29 @@ use CodeIgniter\Shield\Entities\User;
 
 use App\Controllers\BaseController;
 use App\Models\UserModel;
+use App\Models\AuthGroupModel;
 
 
 class UserController extends BaseController
 {
-    // protected $UserModel;
+    protected $UserModel;
+    protected $AuthGroupModel;
 
     public function __construct()
     {
-        // $this->UserModel = new UserModel();
+        $this->UserModel = new UserModel();
+        $this->AuthGroupModel = new AuthGroupModel();
     }
 
     public function index()
     {
         $users = $this->getUserProvider()->findAll();
+
+        foreach ($users as $key => $user) {
+            $user_groups = $user->getGroups();
+            $user->user_groups = implode(' | ', $user_groups);
+        }
+
         $data = [
             'title' => 'User Management',
             'page_title' => 'User List',
@@ -31,9 +40,12 @@ class UserController extends BaseController
 
     public function create()
     {
+        $groups = $this->AuthGroupModel->findAll();
+
         $data = [
             'title' => 'User Management',
             'page_title' => 'Create User',
+            'groups' => $groups,
         ];
 
         return view('user/create', $data);
@@ -63,33 +75,45 @@ class UserController extends BaseController
             'password' => env('app.defaultUserPassword'),
         ];
 
-        $user = $this->getUserEntity();
-        $user->fill($user_data);
+        $created_user = $this->getUserEntity();
+        $created_user->fill($user_data);
 
         try {
-            $users->save($user);
+            $users->save($created_user);
+            
+            // To get the complete user object with ID, we need to get from the database
+            $created_user = $users->findById($users->getInsertID());
+    
+            // Add group
+            $role = $this->request->getPost('role');
+            if($role) {
+                $created_user->syncGroups($role);
+            } else {
+                $users->addToDefaultGroup($created_user);
+            }
+
         } catch (ValidationException $e) {
             return redirect()->back()->withInput()->with('errors', $users->errors());
         }
-
-        // To get the complete user object with ID, we need to get from the database
-        $user = $users->findById($users->getInsertID());
-
-        // Add to default group
-        $users->addToDefaultGroup($user);
 
         return redirect()->to('user');
     }
 
     public function edit($user_id)
     {
+        $groups = $this->AuthGroupModel->findAll();
+
         $user = $this->getUserProvider()->find($user_id);
         $user->email = $user->getEmail();
+
+        $user_groups = $user->getGroups();
+        $user->user_groups = implode(' | ', $user_groups);
         
         $data = [
             'title' => 'User Management',
             'page_title' => 'Edit User',
-            'user' => $user
+            'user' => $user,
+            'groups' => $groups
         ];
         return view('user/edit', $data);
     }
@@ -102,15 +126,29 @@ class UserController extends BaseController
         $username = $this->request->getPost('username');
         $email = $this->request->getPost('email');
 
-        $user = $this->getUserProvider()->find($user_id);
+        $updated_user = $this->getUserProvider()->find($user_id);
         $updated_user_data = [
             'username' => $username,
             'email' => $email,
         ];
 
-        $user->fill($updated_user_data);
-        $users->save($user);
+        $updated_user->fill($updated_user_data);
 
+        try {
+            $users->save($updated_user);
+
+            // Add group
+            $role = $this->request->getPost('role');
+            if($role) {
+                $updated_user->syncGroups($role);
+            } else {
+                $updated_user->syncGroups(config('AuthGroups')->defaultGroup);
+            }
+
+        } catch (ValidationException $e) {
+            return redirect()->back()->withInput()->with('errors', $users->errors());
+        }
+        
         return redirect()->to('user');
     }
     

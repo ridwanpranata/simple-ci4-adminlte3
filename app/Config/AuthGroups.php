@@ -15,6 +15,8 @@ namespace Config;
 
 use CodeIgniter\Shield\Config\AuthGroups as ShieldAuthGroups;
 
+use App\Services\AuthGroupsService;
+
 class AuthGroups extends ShieldAuthGroups
 {
     /**
@@ -113,5 +115,28 @@ class AuthGroups extends ShieldAuthGroups
         'beta' => [
             'beta.access',
         ],
+        'manager' => [
+            'users.create',
+        ],
     ];
+
+
+    public function __construct()
+    {
+        // Create Instance from service
+        $authGroupsService = new AuthGroupsService(new \App\Models\AuthGroupModel());
+
+        // Get group from service
+        $groups = $authGroupsService->getGroups();
+
+        // Fill the Group from service return result
+        foreach ($groups as $group) {
+            $this->groups[$group['name']] = [
+                'title'       => $group['name'],
+                'description' => $group['description'],
+            ];
+        }
+
+        // ... (rest of the constructor)
+    }
 }

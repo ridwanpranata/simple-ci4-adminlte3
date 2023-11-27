@@ -36,6 +36,16 @@
                                             <label for="email">Email</label>
                                             <input type="email" class="form-control" id="email" name="email" value="<?= $user->email ?>" required>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="role">Role</label>
+                                            <select name="role" id="role" class="form-control">
+                                                <option value=""> Select Group </option>
+                                                <?php foreach ($groups as $group) : ?>
+                                                    <?php $selected = ($group['name'] == $user->user_groups) ? 'selected' : ''; ?>
+                                                    <option value="<?= $group['name'] ?>" <?= $selected ?> > <?= $group['name'] ?></option>
+                                                <?php endforeach ?> 
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12 text-right">

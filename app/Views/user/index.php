@@ -35,6 +35,7 @@
                                         <th>No</th>
                                         <th>Username</th>
                                         <th>Email</th>
+                                        <th>Role</th>
                                         <th width="150">Action</th>
                                     </tr>
                                 </thead>
@@ -44,6 +45,7 @@
                                         <td><?= $key + 1 ?></td>
                                         <td><?= $user->username ?></td>
                                         <td><?= $user->getIdentity('email_password')->secret ?></td>
+                                        <td><?= $user->user_groups ?></td>
                                         <td>
                                             <a href="<?= url_to('user-edit', $user->id)?>" class="btn btn-primary btn-sm">Edit</a>
                                             <a href="<?= url_to('user-delete', $user->id)?>" class="btn btn-danger btn-sm">Delete</a>
