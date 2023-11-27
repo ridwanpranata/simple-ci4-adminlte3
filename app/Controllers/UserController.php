@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Controllers;
-use CodeIgniter\Shield\Models\UserModel;
 use CodeIgniter\Shield\Validation\ValidationRules;
 use CodeIgniter\Shield\Entities\User;
 
 
 use App\Controllers\BaseController;
-// use App\Models\UserModel;
+use App\Models\UserModel;
 
 
 class UserController extends BaseController
@@ -85,32 +84,40 @@ class UserController extends BaseController
 
     public function edit($user_id)
     {
+        $user = $this->getUserProvider()->find($user_id);
+        $user->email = $user->getEmail();
+        
         $data = [
             'title' => 'User Management',
             'page_title' => 'Edit User',
-            'user' => $this->UserModel->find($user_id)
+            'user' => $user
         ];
         return view('user/edit', $data);
     }
 
     public function update()
     {
+        $users = $this->getUserProvider();
+
         $user_id = $this->request->getPost('user_id');
-        $name = $this->request->getPost('name');
-        $description = $this->request->getPost('description');
-        
-        $edit_user = [
-            'name' => $name,
-            'description' => $description,
+        $username = $this->request->getPost('username');
+        $email = $this->request->getPost('email');
+
+        $user = $this->getUserProvider()->find($user_id);
+        $updated_user_data = [
+            'username' => $username,
+            'email' => $email,
         ];
 
-        $update_user = $this->UserModel->update($user_id, $edit_user);
+        $user->fill($updated_user_data);
+        $users->save($user);
+
         return redirect()->to('user');
     }
     
     public function delete($user_id)
     {
-        $this->UserModel->delete($user_id);
+        $this->getUserProvider()->delete($user_id);
         return redirect()->to('user');
     }
 
