@@ -16,6 +16,7 @@ namespace Config;
 use CodeIgniter\Shield\Config\AuthGroups as ShieldAuthGroups;
 
 use App\Services\AuthGroupsService;
+use App\Services\AuthPermissionsService;
 
 class AuthGroups extends ShieldAuthGroups
 {
@@ -136,6 +137,17 @@ class AuthGroups extends ShieldAuthGroups
                 'title'       => $group->title,
                 'description' => $group->description,
             ];
+        }
+
+        // Create Instance from service
+        $authPermissionsService = new AuthPermissionsService(new \App\Models\AuthPermissionModel());
+
+        // Get permission from service
+        $permissions = $authPermissionsService->getPermissions();
+
+        // Fill the Permission from service return result
+        foreach ($permissions as $permission) {
+            $this->permissions[$permission->name] = $permission->description;
         }
 
         // ... (rest of the constructor)
