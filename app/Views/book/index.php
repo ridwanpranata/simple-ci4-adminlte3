@@ -42,11 +42,11 @@
                                     <?php foreach ($books as $key => $book) : ?>
                                     <tr>
                                         <td><?= $key + 1 ?></td>
-                                        <td><?= $book['name'] ?></td>
-                                        <td><?= $book['description'] ?></td>
+                                        <td><?= $book->name ?></td>
+                                        <td><?= $book->description ?></td>
                                         <td>
-                                            <a href="<?= url_to('book-edit', $book['id'])?>" class="btn btn-primary btn-sm">Edit</a>
-                                            <a href="<?= url_to('book-delete', $book['id'])?>" class="btn btn-danger btn-sm">Delete</a>
+                                            <a href="<?= url_to('book-edit', $book->id)?>" class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="<?= url_to('book-delete', $book->id)?>" class="btn btn-danger btn-sm">Delete</a>
                                         </td>
                                     </tr>
                                     <?php endforeach ?>

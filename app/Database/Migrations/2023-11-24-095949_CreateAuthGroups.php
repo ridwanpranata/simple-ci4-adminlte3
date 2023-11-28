@@ -6,6 +6,8 @@ use CodeIgniter\Database\Migration;
 
 class CreateAuthGroups extends Migration
 {
+    private $table = 'auth_groups';
+
     public function up()
     {
         $this->forge->addField([
@@ -42,11 +44,11 @@ class CreateAuthGroups extends Migration
         ]);
 
         $this->forge->addKey('id', true);
-        $this->forge->createTable('auth_groups');
+        $this->forge->createTable($this->table);
     }
 
     public function down()
     {
-        $this->forge->dropTable('auth_groups');
+        $this->forge->dropTable($this->table);
     }
 }

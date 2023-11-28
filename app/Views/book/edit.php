@@ -25,16 +25,16 @@
                         <div class="card-body">
                             <form action="<?= url_to('book-update')?>" method="POST">
                                 <?= csrf_field() ?>
-                                <input type="hidden" name="book_id" value="<?= $book['id'] ?>">
+                                <input type="hidden" name="book_id" value="<?= $book->id ?>">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="name">Book Name</label>
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Book Name" value="<?= $book['name'] ?>" required>
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Book Name" value="<?= $book->name ?>" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="description">Description</label>
-                                            <textarea class="form-control" name="description" id="description" cols="30" rows="3"><?= $book['description'] ?></textarea>
+                                            <textarea class="form-control" name="description" id="description" cols="30" rows="3"><?= $book->description ?></textarea>
                                         </div>
                                     </div>
                                 </div>

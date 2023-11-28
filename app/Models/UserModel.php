@@ -26,9 +26,14 @@ class UserModel extends ShieldUserModel
 
     public function getUserGroupsTitle(User $user): array
     {
-        $data = $this->select(sprintf('%1$s.title',$this->authGroupsTable))
+        // dd($user->id);
+        // dd($this);
+        
+        $data = $this
+        ->select(sprintf('%1$s.title',$this->authGroupsTable))
         ->join($this->tables['groups_users'], sprintf('%1$s.user_id = %2$s.id', $this->tables['groups_users'], $this->tables['users']))
         ->join($this->authGroupsTable, sprintf('%1$s.name = %2$s.group', $this->authGroupsTable, $this->tables['groups_users']))
+        ->where(sprintf('%1$s.id', $this->table), $user->id)
         ->findAll($user->id);
 
         $return = array();

@@ -6,6 +6,8 @@ use CodeIgniter\Database\Migration;
 
 class CreateBooksTable extends Migration
 {
+    private $table = 'books';
+
     public function up()
     {
         $this->forge->addField([
@@ -19,8 +21,7 @@ class CreateBooksTable extends Migration
                 'constraint' => 255
             ],
             'description' => [
-                'type' => 'varchar', 
-                'constraint' => 255, 
+                'type' => 'TEXT', 
                 'null' => true
             ],
             'created_at' => [
@@ -37,11 +38,11 @@ class CreateBooksTable extends Migration
             ],
         ]);
         $this->forge->addKey('id',true);
-        $this->forge->createTable('books');
+        $this->forge->createTable($this->table);
     }
 
     public function down()
     {
-        $this->forge->dropTable('books');
+        $this->forge->dropTable($this->table);
     }
 }

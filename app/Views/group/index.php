@@ -43,12 +43,12 @@
                                     <?php foreach ($groups as $key => $group) : ?>
                                     <tr>
                                         <td><?= $key + 1 ?></td>
-                                        <td><?= $group['name'] ?></td>
-                                        <td><?= $group['title'] ?></td>
-                                        <td><?= $group['description'] ?></td>
+                                        <td><?= $group->name ?></td>
+                                        <td><?= $group->title ?></td>
+                                        <td><?= $group->description ?></td>
                                         <td>
-                                            <a href="<?= url_to('group-edit', $group['id'])?>" class="btn btn-primary btn-sm">Edit</a>
-                                            <a href="<?= url_to('group-delete', $group['id'])?>" class="btn btn-danger btn-sm">Delete</a>
+                                            <a href="<?= url_to('group-edit', $group->id)?>" class="btn btn-primary btn-sm">Edit</a>
+                                            <a href="<?= url_to('group-delete', $group->id)?>" class="btn btn-danger btn-sm">Delete</a>
                                         </td>
                                     </tr>
                                     <?php endforeach ?>

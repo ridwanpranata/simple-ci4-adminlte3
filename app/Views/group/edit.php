@@ -25,20 +25,20 @@
                         <div class="card-body">
                             <form action="<?= url_to('group-update')?>" method="POST">
                                 <?= csrf_field() ?>
-                                <input type="hidden" name="group_id" value="<?= $group['id'] ?>">
+                                <input type="hidden" name="group_id" value="<?= $group->id ?>">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
                                             <label for="name">Group Name</label>
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Group Name" value="<?= $group['name'] ?>" required>
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Group Name" value="<?= $group->name ?>" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="title">Group Title</label>
-                                            <input type="text" class="form-control" id="title" name="title" placeholder="Enter Group Title" value="<?= $group['title'] ?>" required>
+                                            <input type="text" class="form-control" id="title" name="title" placeholder="Enter Group Title" value="<?= $group->title ?>" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="description">Description</label>
-                                            <textarea class="form-control" name="description" id="description" cols="30" rows="3"><?= $group['description'] ?></textarea>
+                                            <textarea class="form-control" name="description" id="description" cols="30" rows="3"><?= $group->description ?></textarea>
                                         </div>
                                     </div>
                                 </div>

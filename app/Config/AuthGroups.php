@@ -132,9 +132,9 @@ class AuthGroups extends ShieldAuthGroups
 
         // Fill the Group from service return result
         foreach ($groups as $group) {
-            $this->groups[$group['name']] = [
-                'title'       => $group['name'],
-                'description' => $group['description'],
+            $this->groups[$group->name] = [
+                'title'       => $group->title,
+                'description' => $group->description,
             ];
         }
 

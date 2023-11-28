@@ -41,8 +41,8 @@
                                             <select name="group" id="group" class="form-control">
                                                 <option value=""> Select Group </option>
                                                 <?php foreach ($groups as $group) : ?>
-                                                    <?php $selected = ($group['name'] == $user->user_group) ? 'selected' : ''; ?>
-                                                    <option value="<?= $group['name'] ?>" <?= $selected ?> > <?= $group['title'] ?></option>
+                                                    <?php $selected = ($group->name == $user->user_group) ? 'selected' : ''; ?>
+                                                    <option value="<?= $group->name ?>" <?= $selected ?> > <?= $group->title ?></option>
                                                 <?php endforeach ?> 
                                             </select>
                                         </div>
