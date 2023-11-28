@@ -4,9 +4,9 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateAuthGroups extends Migration
+class CreateAuthGroupHasPermissions extends Migration
 {
-    private $table = 'auth_groups';
+    private $table = 'auth_group_has_permissions';
 
     public function up()
     {
@@ -17,17 +17,13 @@ class CreateAuthGroups extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'name'         => [
-                'type'       => 'VARCHAR',
-                'constraint' => '100',
+            'group_id' => [
+                'type' => 'INT',
+                'unsigned' => true,
             ],
-            'title'         => [
-                'type'       => 'VARCHAR',
-                'constraint' => '100',
-            ],
-            'description'  => [
-                'type'       => 'TEXT',
-                'null'       => true,
+            'permission_id' => [
+                'type' => 'INT',
+                'unsigned' => true,
             ],
             'created_at' => [
                 'type' => 'DATETIME', 
@@ -40,6 +36,8 @@ class CreateAuthGroups extends Migration
         ]);
 
         $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('group_id', 'auth_groups', 'id');
+        $this->forge->addForeignKey('permission_id', 'auth_permissions', 'id');
         $this->forge->createTable($this->table);
     }
 

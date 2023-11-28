@@ -26,11 +26,11 @@ class CreateAuthPermissions extends Migration
                 'null'       => true,
             ],
             'created_at' => [
-                'type' => 'datetime', 
+                'type' => 'DATETIME', 
                 'null' => true
             ],
             'updated_at' => [
-                'type' => 'datetime', 
+                'type' => 'DATETIME', 
                 'null' => true
             ],
         ]);
