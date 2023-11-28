@@ -25,7 +25,7 @@ class UserController extends BaseController
         $users = $this->getUserProvider()->findAll();
 
         foreach ($users as $key => $user) {
-            $user_groups = $user->getGroups();
+            $user_groups = $this->UserModel->getUserGroupsTitle($user);
             $user->user_groups = implode(' | ', $user_groups);
         }
 
@@ -106,8 +106,8 @@ class UserController extends BaseController
         $user = $this->getUserProvider()->find($user_id);
         $user->email = $user->getEmail();
 
-        $user_groups = $user->getGroups();
-        $user->user_groups = implode(' | ', $user_groups);
+        // ## note : 1 user only 1 group for now. get first group of this user
+        $user->user_group = $user->getGroups()[0];
         
         $data = [
             'title' => 'User Management',

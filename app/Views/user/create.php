@@ -54,7 +54,7 @@
                                             <select name="group" id="group" class="form-control">
                                                 <option value=""> Select Group </option>
                                                 <?php foreach ($groups as $group) : ?>
-                                                    <option value="<?= $group['name'] ?>"> <?= $group['name'] ?></option>
+                                                    <option value="<?= $group['name'] ?>"> <?= $group['title'] ?></option>
                                                 <?php endforeach ?> 
                                             </select>
                                         </div>
