@@ -35,7 +35,7 @@
                                         <th>No</th>
                                         <th>Username</th>
                                         <th>Email</th>
-                                        <th>Role</th>
+                                        <th>Group</th>
                                         <th width="150">Action</th>
                                     </tr>
                                 </thead>

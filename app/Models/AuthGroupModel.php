@@ -13,7 +13,7 @@ class AuthGroupModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'description'];
+    protected $allowedFields    = ['name', 'title', 'description'];
 
     // Dates
     protected $useTimestamps = true;
@@ -22,9 +22,18 @@ class AuthGroupModel extends Model
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
 
+    
     // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
+    protected $validationRules      = [
+        'id'   => 'max_length[19]',
+        'name' => 'required|is_unique[auth_groups.name,id,{id}]|regex_match[/^[a-z_]+$/]',
+    ];
+    protected $validationMessages   = [
+        'name' => [
+            'is_unique' => 'This group is already registered!',
+            'regex_match' => 'Group name is not valid! Use only lowercase letters and underscores',
+        ],
+    ];
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 

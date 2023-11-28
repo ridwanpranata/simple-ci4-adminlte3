@@ -34,7 +34,8 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Name</th>
-                                        <th width="60%">Description</th>
+                                        <th>Title</th>
+                                        <th width="50%">Description</th>
                                         <th width="150">Action</th>
                                     </tr>
                                 </thead>
@@ -43,6 +44,7 @@
                                     <tr>
                                         <td><?= $key + 1 ?></td>
                                         <td><?= $group['name'] ?></td>
+                                        <td><?= $group['title'] ?></td>
                                         <td><?= $group['description'] ?></td>
                                         <td>
                                             <a href="<?= url_to('group-edit', $group['id'])?>" class="btn btn-primary btn-sm">Edit</a>

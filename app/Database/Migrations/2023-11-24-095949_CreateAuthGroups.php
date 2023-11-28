@@ -19,6 +19,10 @@ class CreateAuthGroups extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
             ],
+            'title'         => [
+                'type'       => 'VARCHAR',
+                'constraint' => '100',
+            ],
             'description'  => [
                 'type'       => 'TEXT',
                 'null'       => true,

@@ -85,9 +85,9 @@ class UserController extends BaseController
             $created_user = $users->findById($users->getInsertID());
     
             // Add group
-            $role = $this->request->getPost('role');
-            if($role) {
-                $created_user->syncGroups($role);
+            $group = $this->request->getPost('group');
+            if($group) {
+                $created_user->syncGroups($group);
             } else {
                 $users->addToDefaultGroup($created_user);
             }
@@ -138,9 +138,9 @@ class UserController extends BaseController
             $users->save($updated_user);
 
             // Add group
-            $role = $this->request->getPost('role');
-            if($role) {
-                $updated_user->syncGroups($role);
+            $group = $this->request->getPost('group');
+            if($group) {
+                $updated_user->syncGroups($group);
             } else {
                 $updated_user->syncGroups(config('AuthGroups')->defaultGroup);
             }

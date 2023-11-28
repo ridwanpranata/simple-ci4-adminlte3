@@ -50,8 +50,8 @@
                                             <input type="email" class="form-control" id="email" name="email" placeholder="Enter User Email" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="role">Role</label>
-                                            <select name="role" id="role" class="form-control">
+                                            <label for="group">Group</label>
+                                            <select name="group" id="group" class="form-control">
                                                 <option value=""> Select Group </option>
                                                 <?php foreach ($groups as $group) : ?>
                                                     <option value="<?= $group['name'] ?>"> <?= $group['name'] ?></option>

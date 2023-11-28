@@ -38,14 +38,19 @@ class GroupController extends BaseController
     public function store()
     {
         $name = $this->request->getPost('name');
+        $title = $this->request->getPost('title');
         $description = $this->request->getPost('description');
         
-        $new_group = [
+        $new_data = [
             'name' => $name,
+            'title' => $title,
             'description' => $description,
         ];
 
-        $insert_group = $this->AuthGroupModel->insert($new_group);
+        if(!$this->AuthGroupModel->save($new_data)){
+            return redirect()->back()->with('errors', $this->AuthGroupModel->errors());
+        }
+        
         return redirect()->to('group');
     }
 
@@ -63,15 +68,23 @@ class GroupController extends BaseController
     {
         $group_id = $this->request->getPost('group_id');
         $name = $this->request->getPost('name');
+        $title = $this->request->getPost('title');
         $description = $this->request->getPost('description');
         
         $edit_group = [
+            'id' => $group_id,
             'name' => $name,
+            'title' => $title,
             'description' => $description,
         ];
 
-        $update_group = $this->AuthGroupModel->update($group_id, $edit_group);
-        return redirect()->to('group');
+        if(!$this->AuthGroupModel->update($group_id, $edit_group)){
+            dd($this->AuthGroupModel->errors());
+            
+            return redirect()->back()->with('errors', $this->AuthGroupModel->errors());
+        }
+        
+        return redirect()->route('group');
     }
     
     public function delete($group_id)

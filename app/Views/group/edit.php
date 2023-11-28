@@ -33,6 +33,10 @@
                                             <input type="text" class="form-control" id="name" name="name" placeholder="Enter Group Name" value="<?= $group['name'] ?>" required>
                                         </div>
                                         <div class="form-group">
+                                            <label for="title">Group Title</label>
+                                            <input type="text" class="form-control" id="title" name="title" placeholder="Enter Group Title" value="<?= $group['title'] ?>" required>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="description">Description</label>
                                             <textarea class="form-control" name="description" id="description" cols="30" rows="3"><?= $group['description'] ?></textarea>
                                         </div>

@@ -82,6 +82,7 @@ class AuthGroups extends ShieldAuthGroups
         'users.delete'        => 'Can delete existing non-admin users',
         'beta.access'         => 'Can access beta-level features',
         'book.access'         => 'Can access book features',
+        'book.create'         => 'Can create new book',
     ];
 
     /**
@@ -93,6 +94,12 @@ class AuthGroups extends ShieldAuthGroups
      * This defines group-level permissions.
      */
     public array $matrix = [
+        'developer' => [
+            'admin.*',
+            'users.*',
+            'beta.*',
+            'book.*',
+        ],
         'superadmin' => [
             'admin.*',
             'users.*',
@@ -106,19 +113,11 @@ class AuthGroups extends ShieldAuthGroups
             'beta.access',
             'book.access',
         ],
-        'developer' => [
-            'admin.access',
-            'admin.settings',
-            'users.create',
-            'users.edit',
-            'beta.access',
+        'user' => [
+            'book.access'
         ],
-        'user' => [],
         'beta' => [
             'beta.access',
-        ],
-        'manager' => [
-            'users.create',
         ],
     ];
 
