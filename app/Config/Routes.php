@@ -33,14 +33,8 @@ $routes->get('/', 'Home::index');
 // => default controller
 $routes->get('/dashboard', 'DashboardController::index',['as' => 'dashboard']);
 
-$routes->get('/book', 'BookController::index',['as' => 'book']);
-$routes->get('/book/create', 'BookController::create',['as' => 'book-create']);
-$routes->post('/book/store', 'BookController::store',['as' => 'book-store']);
-$routes->get('/book/edit/(:num)', 'BookController::edit/$1',['as' => 'book-edit']);
-$routes->post('/book/update', 'BookController::update',['as' => 'book-update']);
-$routes->get('/book/delete/(:num)', 'BookController::delete/$1',['as' => 'book-delete']);
 
-$routes->group('user', static function ($routes) {
+$routes->group('user', ['filter' => 'group:admin'], static function ($routes) {
     $routes->get('', 'UserController::index',['as' => 'user']);
     $routes->get('create', 'UserController::create',['as' => 'user-create']);
     $routes->post('store', 'UserController::store',['as' => 'user-store']);
@@ -49,13 +43,22 @@ $routes->group('user', static function ($routes) {
     $routes->get('delete/(:num)', 'UserController::delete/$1',['as' => 'user-delete']);
 });
 
-$routes->group('group', static function ($routes) {
+$routes->group('group', ['filter' => 'group:admin,programmer'], static function ($routes) {
     $routes->get('', 'GroupController::index',['as' => 'group']);
     $routes->get('create', 'GroupController::create',['as' => 'group-create']);
     $routes->post('store', 'GroupController::store',['as' => 'group-store']);
     $routes->get('edit/(:num)', 'GroupController::edit/$1',['as' => 'group-edit']);
     $routes->post('update', 'GroupController::update',['as' => 'group-update']);
     $routes->get('delete/(:num)', 'GroupController::delete/$1',['as' => 'group-delete']);
+});
+
+$routes->group('book', ['filter' => 'permission:book.access'], static function ($routes) {
+    $routes->get('', 'BookController::index',['as' => 'book']);
+    $routes->get('create', 'BookController::create',['as' => 'book-create']);
+    $routes->post('store', 'BookController::store',['as' => 'book-store']);
+    $routes->get('edit/(:num)', 'BookController::edit/$1',['as' => 'book-edit']);
+    $routes->post('update', 'BookController::update',['as' => 'book-update']);
+    $routes->get('delete/(:num)', 'BookController::delete/$1',['as' => 'book-delete']);
 });
 
 
