@@ -6,7 +6,7 @@ use CodeIgniter\Database\Seeder;
 
 class GroupsTableSeeder extends Seeder
 {
-     private $table = 'auth_groups';
+    private $table = 'auth_groups';
 
     public function run()
     {

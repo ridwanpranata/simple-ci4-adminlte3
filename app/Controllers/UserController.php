@@ -56,7 +56,7 @@ class UserController extends BaseController
         $users = $this->getUserProvider();
         $rules = $this->getValidationRules();
 
-        // ## tidak semual rules bawaan shield yang di pakai
+        // ## menggunakan rules bawaan shield. namun pakai rule key yang diperlukan saja
         $filteredRules = array_filter(
             $rules,
             function ($key) {
