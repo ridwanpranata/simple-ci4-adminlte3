@@ -52,6 +52,15 @@ $routes->group('group', ['filter' => 'permission:admin.access'], static function
     $routes->get('delete/(:num)', 'GroupController::delete/$1',['as' => 'group-delete']);
 });
 
+$routes->group('permission', ['filter' => 'permission:admin.access'], static function ($routes) {
+    $routes->get('', 'PermissionController::index',['as' => 'permission']);
+    $routes->get('create', 'PermissionController::create',['as' => 'permission-create']);
+    $routes->post('store', 'PermissionController::store',['as' => 'permission-store']);
+    $routes->get('edit/(:num)', 'PermissionController::edit/$1',['as' => 'permission-edit']);
+    $routes->post('update', 'PermissionController::update',['as' => 'permission-update']);
+    $routes->get('delete/(:num)', 'PermissionController::delete/$1',['as' => 'permission-delete']);
+});
+
 $routes->group('book', ['filter' => 'permission:book.access'], static function ($routes) {
     $routes->get('', 'BookController::index', ['as' => 'book']);
     $routes->get('create', 'BookController::create', ['as' => 'book-create', 'filter' => 'permission:book.create']);

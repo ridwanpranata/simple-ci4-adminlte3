@@ -35,6 +35,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="<?= url_to('permission') ?>" class="nav-link">
+                        <i class="fas fa-user-check nav-icon"></i>
+                        <p>Permissions</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="<?= url_to('book') ?>" class="nav-link">
                         <i class="fas fa-book nav-icon"></i>
                         <p>Books</p>

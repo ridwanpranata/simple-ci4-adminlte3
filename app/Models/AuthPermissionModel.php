@@ -4,16 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AuthGroupModel extends Model
+class AuthPermissionModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'auth_groups';
+    protected $table            = 'auth_permissions';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'title', 'description'];
+    protected $allowedFields    = ['name', 'description'];
 
     // Dates
     protected $useTimestamps = true;
@@ -26,12 +26,12 @@ class AuthGroupModel extends Model
     // Validation
     protected $validationRules      = [
         'id'   => 'max_length[19]',
-        'name' => 'required|is_unique[auth_groups.name,id,{id}]|regex_match[/^[a-z_]+$/]',
+        'name' => 'required|is_unique[auth_permissions.name,id,{id}]|regex_match[/^[a-z.]+$/]',
     ];
     protected $validationMessages   = [
         'name' => [
-            'is_unique' => 'This group is already registered!',
-            'regex_match' => 'Group name is not valid! Use only lowercase letters and underscores',
+            'is_unique' => 'This permission is already registered!',
+            'regex_match' => 'Permission name is not valid! Use only lowercase letters and dot(.)',
         ],
     ];
     protected $skipValidation       = false;
