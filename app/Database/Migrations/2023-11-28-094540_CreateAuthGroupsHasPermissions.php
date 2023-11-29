@@ -4,17 +4,17 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateAuthGroupHasPermissions extends Migration
+class CreateAuthGroupsHasPermissions extends Migration
 {
-    private $table = 'auth_group_has_permissions';
+    private $table = 'auth_groups_has_permissions';
 
     public function up()
     {
         $this->forge->addField([
-            'id'           => [
-                'type'           => 'INT',
-                'constraint'     => 5,
-                'unsigned'       => true,
+            'id' => [
+                'type' => 'INT',
+                'constraint' => 5,
+                'unsigned' => true,
                 'auto_increment' => true,
             ],
             'group_id' => [
