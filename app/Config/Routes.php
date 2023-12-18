@@ -50,6 +50,7 @@ $routes->group('group', ['filter' => 'permission:admin.access'], static function
     $routes->get('edit/(:num)', 'GroupController::edit/$1',['as' => 'group-edit']);
     $routes->post('update', 'GroupController::update',['as' => 'group-update']);
     $routes->get('delete/(:num)', 'GroupController::delete/$1',['as' => 'group-delete']);
+    $routes->get('(:num)/manage-permission', 'GroupController::manage_permission/$1',['as' => 'group-manage-permission']);
 });
 
 $routes->group('permission-category', ['filter' => 'permission:admin.access'], static function ($routes) {

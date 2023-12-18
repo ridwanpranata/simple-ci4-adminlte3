@@ -4,15 +4,24 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\AuthGroupModel;
+use App\Models\AuthPermissionModel;
+use App\Models\AuthGroupHasPermissionModel;
+use App\Models\AuthPermissionCategoryModel;
 
 
 class GroupController extends BaseController
 {
     protected $AuthGroupModel;
+    protected $AuthPermissionModel;
+    protected $AuthGroupHasPermissionModel;
+    protected $AuthPermissionCategoryModel;
 
     public function __construct()
     {
         $this->AuthGroupModel = new AuthGroupModel();
+        $this->AuthPermissionModel = new AuthPermissionModel();
+        $this->AuthGroupHasPermissionModel = new AuthGroupHasPermissionModel();
+        $this->AuthPermissionCategoryModel = new AuthPermissionCategoryModel();
     }
 
     public function index()
@@ -79,8 +88,6 @@ class GroupController extends BaseController
         ];
 
         if(!$this->AuthGroupModel->update($group_id, $edit_group)){
-            dd($this->AuthGroupModel->errors());
-            
             return redirect()->back()->with('errors', $this->AuthGroupModel->errors());
         }
         
@@ -91,5 +98,28 @@ class GroupController extends BaseController
     {
         $this->AuthGroupModel->delete($group_id);
         return redirect()->to('group');
+    }
+
+    public function manage_permission($group_id)
+    {
+        $permission_categories = $this->AuthPermissionCategoryModel->findAll();
+        $permission_by_categories = [];
+        foreach ($permission_categories as $key => $category) {
+            $permissions = $this->AuthPermissionModel->where('permission_category_id',$category->id)->findAll();
+            foreach ($permissions as $key_permission => $permission) {
+                $is_group_permission = $this->AuthGroupHasPermissionModel->isGroupHasPermission($group_id, $permission->id);
+                $permission->is_group_has_permisssion = $is_group_permission;
+                
+            }
+            $permission_by_categories[$category->name] = $permissions;
+        }
+
+        $data = [
+            'title' => 'Manage Permissions',
+            'permission_by_categories' => $permission_by_categories,
+        ];
+        // dd($data);
+        
+        return view('group/manage-permission', $data);
     }
 }
