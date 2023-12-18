@@ -4,16 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AuthPermissionModel extends Model
+class AuthPermissionCategoryModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'auth_permissions';
+    protected $table            = 'auth_permissions_categories';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['name', 'description','permission_category_id'];
+    protected $allowedFields    = ['name', 'description'];
 
     // Dates
     protected $useTimestamps = true;
@@ -26,12 +26,11 @@ class AuthPermissionModel extends Model
     // Validation
     protected $validationRules      = [
         'id'   => 'max_length[19]',
-        'name' => 'required|is_unique[auth_permissions.name,id,{id}]|regex_match[/^[a-z.]+$/]',
+        'name' => 'required|is_unique[auth_permissions_categories.name,id,{id}]',
     ];
     protected $validationMessages   = [
         'name' => [
-            'is_unique' => 'This permission is already registered!',
-            'regex_match' => 'Permission name is not valid! Use only lowercase letters and dot(.)',
+            'is_unique' => 'This permission category is already registered!',
         ],
     ];
     protected $skipValidation       = false;
@@ -48,11 +47,4 @@ class AuthPermissionModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function getPermissions()
-    {
-        $builder = $this;
-        $builder->join('auth_permissions_categories','auth_permissions_categories.id = auth_permissions.permission_category_id','LEFT');
-        $builder->select('auth_permissions.*, auth_permissions_categories.name as category_name');
-        return $builder->get()->getResult();
-    }
 }

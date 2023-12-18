@@ -52,6 +52,15 @@ $routes->group('group', ['filter' => 'permission:admin.access'], static function
     $routes->get('delete/(:num)', 'GroupController::delete/$1',['as' => 'group-delete']);
 });
 
+$routes->group('permission-category', ['filter' => 'permission:admin.access'], static function ($routes) {
+    $routes->get('', 'PermissionCategoryController::index',['as' => 'permission-category']);
+    $routes->get('create', 'PermissionCategoryController::create',['as' => 'permission-category-create']);
+    $routes->post('store', 'PermissionCategoryController::store',['as' => 'permission-category-store']);
+    $routes->get('edit/(:num)', 'PermissionCategoryController::edit/$1',['as' => 'permission-category-edit']);
+    $routes->post('update', 'PermissionCategoryController::update',['as' => 'permission-category-update']);
+    $routes->get('delete/(:num)', 'PermissionCategoryController::delete/$1',['as' => 'permission-category-delete']);
+});
+
 $routes->group('permission', ['filter' => 'permission:admin.access'], static function ($routes) {
     $routes->get('', 'PermissionController::index',['as' => 'permission']);
     $routes->get('create', 'PermissionController::create',['as' => 'permission-create']);

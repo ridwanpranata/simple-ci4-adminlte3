@@ -35,6 +35,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="<?= url_to('permission-category') ?>" class="nav-link">
+                        <i class="fas fa-user-check nav-icon"></i>
+                        <p>Permissions Category</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="<?= url_to('permission') ?>" class="nav-link">
                         <i class="fas fa-user-check nav-icon"></i>
                         <p>Permissions</p>

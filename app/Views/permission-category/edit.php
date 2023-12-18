@@ -23,32 +23,24 @@
                     <div class="card">
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form action="<?= url_to('permission-store')?>" method="POST">
+                            <form action="<?= url_to('permission-category-update')?>" method="POST">
                                 <?= csrf_field() ?>
+                                <input type="hidden" name="permission_category_id" value="<?= $permission_category->id ?>">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-12">
                                         <div class="form-group">
-                                            <label for="name">Permission Name</label>
-                                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Permission Name" required>
+                                            <label for="name">Permission Category Name</label>
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Permission Category Name" value="<?= $permission_category->name ?>" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="description">Description</label>
-                                            <textarea class="form-control" name="description" id="description" cols="30" rows="3"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="permission-category">Permission Category</label>
-                                            <select name="permission_category" id="permission-category" class="form-control">
-                                                <option value=""> Select Category </option>
-                                                <?php foreach ($permission_categories as $permission_category) : ?>
-                                                    <option value="<?= $permission_category->id ?>"> <?= $permission_category->name ?></option>
-                                                <?php endforeach ?> 
-                                            </select>
+                                            <textarea class="form-control" name="description" id="description" cols="30" rows="3"><?= $permission_category->description ?></textarea>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12 text-right">
-                                    <a href="<?= url_to('permission') ?>" type="button" class="btn btn-secondary">Cancel</a>
-                                    <button type="submit" class="btn btn-primary" id="btn_submit">Add Permission</button>
+                                    <a href="<?= url_to('permission-category') ?>" type="button" class="btn btn-secondary">Cancel</a>
+                                    <button type="submit" class="btn btn-primary" id="btn_submit">Update Permission Category</button>
                                 </div>
                             </form>
                         </div>

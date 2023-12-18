@@ -36,6 +36,16 @@
                                             <label for="description">Description</label>
                                             <textarea class="form-control" name="description" id="description" cols="30" rows="3"><?= $permission->description ?></textarea>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="permission-category">Permission Category</label>
+                                            <select name="permission_category" id="permission-category" class="form-control">
+                                                <option value=""> Select Category </option>
+                                                <?php foreach ($permission_categories as $permission_category) : ?>
+                                                    <?php $selected = ($permission_category->id == $permission->permission_category_id) ? 'selected' : ''; ?>
+                                                    <option value="<?= $permission_category->id ?>" <?= $selected ?> > <?= $permission_category->name ?></option>
+                                                <?php endforeach ?> 
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12 text-right">
