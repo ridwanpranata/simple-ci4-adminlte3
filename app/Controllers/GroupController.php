@@ -102,24 +102,51 @@ class GroupController extends BaseController
 
     public function manage_permission($group_id)
     {
+        $group = $this->AuthGroupModel->find($group_id);
         $permission_categories = $this->AuthPermissionCategoryModel->findAll();
         $permission_by_categories = [];
         foreach ($permission_categories as $key => $category) {
             $permissions = $this->AuthPermissionModel->where('permission_category_id',$category->id)->findAll();
+            $permission_checked_counter = 0;
             foreach ($permissions as $key_permission => $permission) {
                 $is_group_permission = $this->AuthGroupHasPermissionModel->isGroupHasPermission($group_id, $permission->id);
                 $permission->is_group_has_permisssion = $is_group_permission;
-                
+                if($is_group_permission){ $permission_checked_counter++; }
             }
-            $permission_by_categories[$category->name] = $permissions;
+
+            $is_checked = (count($permissions) == $permission_checked_counter) ? true : false;
+            $category_data = (object) [
+                'category_name' => $category->name,
+                'permissions' => $permissions,
+                'is_checked' => $is_checked,
+            ];
+            $permission_by_categories[] = $category_data;
         }
 
         $data = [
             'title' => 'Manage Permissions',
+            'group' => $group,
             'permission_by_categories' => $permission_by_categories,
         ];
-        // dd($data);
         
         return view('group/manage-permission', $data);
+    }
+
+    public function manage_permission_update($group_id)
+    {
+        $selected_permission = $this->request->getPost('selected_permission');
+        try {
+            if($selected_permission) {
+                $this->AuthGroupHasPermissionModel->transException(true)->transStart();
+                $this->AuthGroupHasPermissionModel->where('group_id', $group_id)->delete();
+                foreach ($selected_permission as $key => $permission_id) {
+                    $this->AuthGroupHasPermissionModel->insert(['group_id' => $group_id, 'permission_id' => $permission_id]);
+                }
+                $this->AuthGroupHasPermissionModel->transComplete();
+            }
+            return redirect()->route('group');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('errors', $th->getMessage());
+        }
     }
 }

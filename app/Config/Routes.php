@@ -51,6 +51,7 @@ $routes->group('group', ['filter' => 'permission:admin.access'], static function
     $routes->post('update', 'GroupController::update',['as' => 'group-update']);
     $routes->get('delete/(:num)', 'GroupController::delete/$1',['as' => 'group-delete']);
     $routes->get('(:num)/manage-permission', 'GroupController::manage_permission/$1',['as' => 'group-manage-permission']);
+    $routes->post('(:num)/manage-permission', 'GroupController::manage_permission_update/$1',['as' => 'group-manage-permission-update']);
 });
 
 $routes->group('permission-category', ['filter' => 'permission:admin.access'], static function ($routes) {
