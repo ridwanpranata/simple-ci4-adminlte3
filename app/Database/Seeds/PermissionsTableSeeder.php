@@ -29,7 +29,7 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id' => 3,
-                'name' => 'manage-admins',
+                'name' => 'users.manage-admins',
                 'description' => 'Can manage other admins.',
                 'permission_category_id' => 1,
                 'created_at' => date('Y-m-d H:i:s'),
