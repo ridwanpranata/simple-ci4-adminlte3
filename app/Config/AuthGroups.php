@@ -17,6 +17,7 @@ use CodeIgniter\Shield\Config\AuthGroups as ShieldAuthGroups;
 
 use App\Services\AuthGroupsService;
 use App\Services\AuthPermissionsService;
+use App\Services\AuthMatrixService;
 
 class AuthGroups extends ShieldAuthGroups
 {
@@ -127,11 +128,17 @@ class AuthGroups extends ShieldAuthGroups
     {
         // Create Instance from service
         $authGroupsService = new AuthGroupsService(new \App\Models\AuthGroupModel());
+        $authPermissionsService = new AuthPermissionsService(new \App\Models\AuthPermissionModel());
+        $authMatrixService = new AuthMatrixService();
 
-        // Get group from service
+
+        /*
+        * Manipulate Group variable
+        * Get Group from service
+        */
         $groups = $authGroupsService->getGroups();
 
-        // Fill the Group from service return result
+        // Fill the Group with data from service
         foreach ($groups as $group) {
             $this->groups[$group->name] = [
                 'title'       => $group->title,
@@ -139,17 +146,29 @@ class AuthGroups extends ShieldAuthGroups
             ];
         }
 
-        // Create Instance from service
-        $authPermissionsService = new AuthPermissionsService(new \App\Models\AuthPermissionModel());
-
-        // Get permission from service
+        /*
+        * Manipulate Permission variable
+        * Get Permission from service
+        */
         $permissions = $authPermissionsService->getPermissions();
 
-        // Fill the Permission from service return result
+        // Fill the Permission with data from service
         foreach ($permissions as $permission) {
             $this->permissions[$permission->name] = $permission->description;
         }
 
+
+        /*
+        * Manipulate Matrix (Group has Permissions) variable
+        * Get Matrix from service
+        */
+        $matrix = $authMatrixService->getMatrix();
+
+        // Fill the Permission with data from permissions service
+        foreach ($matrix as $group) {
+            $this->matrix[$group->group_name] = $group->permissions;
+        }
+        
         // ... (rest of the constructor)
     }
 }
